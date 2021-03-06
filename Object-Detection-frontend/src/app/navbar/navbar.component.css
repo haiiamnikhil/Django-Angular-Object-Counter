@@ -1,0 +1,13 @@
+.navbar a{
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.dropdown-item:hover{
+    background-color:black;
+    transition:0.3s ease-in-out;
+}
+
+.fixed-top{
+    position: relative !important;
+}

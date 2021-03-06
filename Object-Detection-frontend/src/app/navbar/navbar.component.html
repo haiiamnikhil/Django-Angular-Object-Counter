@@ -1,0 +1,41 @@
+<!-- Nav menu with side menu -->
+<nav class="navbar navbar-expand-xl pmd-navbar bg-dark pmd-z-depth fixed-top">
+      
+    <button class="navbar-toggler pmd-navbar-toggle" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" routerLink="/">AI Counter</a>
+    
+    <div class="collapse navbar-collapse pmd-navbar-sidebar" id="navbarSupportedContent">
+        
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link pmd-ripple-effect" routerLink="singledetector">Single Detection <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="multidetector">Multi Detection</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            
+            <li class="nav-item dropdown pmd-dropdown">
+                
+                <a href="javascript:void(0);" class="btn-user dropdown-toggle media align-items-center" data-toggle="dropdown" data-sidebar="true" aria-expanded="false">
+                    <img class="mr-2" src="https://pro.propeller.in/assets/images/avatar-icon-40x40.png" width="40" height="40" alt="avatar">
+                    <div class="media-body">
+                        User
+                    </div>
+                    <i class="material-icons md-light ml-2 pmd-sm"></i>
+                </a>
+                <div class="dropdown pmd-dropdown bg-dark pmd-user-info">
+            
+                    <ul class="dropdown-menu bg-dark dropdown-menu-right" role="menu">
+                        <a class="dropdown-item" routerLink="/profile">Edit Profile</a>
+                        <a class="dropdown-item" type="button" (click)="logout()">Logout</a>
+                    </ul>
+                </div>
+            </li>
+        </ul> 
+    </div>
+    <div class="pmd-sidebar-overlay"></div>
+</nav>

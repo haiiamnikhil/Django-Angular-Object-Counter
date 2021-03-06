@@ -1,0 +1,23 @@
+<div [ngSwitch]="router.url">
+  <div class="login-page" *ngSwitchCase="'/login'">
+
+    <router-outlet></router-outlet>
+
+
+  </div>
+  <div class="login-page" *ngSwitchCase="'/register'">
+
+    <router-outlet></router-outlet>
+
+  </div>
+  <div *ngSwitchCase="'/profile'">
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+
+  </div>
+  <div *ngSwitchDefault>
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+
+  </div>
+</div>

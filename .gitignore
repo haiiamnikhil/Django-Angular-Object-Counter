@@ -1,0 +1,10 @@
+app/__pycache__/
+app/detector/yolov3.weights
+app/detector/yolov4.weights
+app/detector/__pycache__/
+app/migrations/
+ObjectCounter/__pycache__/
+media/
+.idea/
+.vscode/
+Object-Counter-Mobile-App/

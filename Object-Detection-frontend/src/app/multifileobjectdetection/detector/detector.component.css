@@ -1,0 +1,14 @@
+tbody:hover{
+    background-color: #e9ecef;
+    font-weight: bold;
+    transition:.3s ease-in-out;
+}
+
+.download a{
+    color: white !important;
+    text-decoration: none;
+}
+
+.download a:hover{
+    background-color: #035dbe;
+}
