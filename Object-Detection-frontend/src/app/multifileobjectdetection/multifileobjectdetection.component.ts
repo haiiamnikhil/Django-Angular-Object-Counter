@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -20,6 +20,14 @@ export class MultifileobjectdetectionComponent implements OnInit {
   ngOnInit(): void {
   }
   
+  getDropedFiles(event:any){
+    for (let i = 0; i < event.length; i++) {
+      this.names.push(event[i].name)
+      this.files.push(event[i]);
+    }
+    this.label = this.names.length + " Files Added"
+  }
+
   getfile(event:any){
     const filereader = new FileReader();
     for(let i = 0; i < event.target.files.length; i++){

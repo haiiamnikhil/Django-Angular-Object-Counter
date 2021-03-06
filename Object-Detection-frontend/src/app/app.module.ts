@@ -15,9 +15,10 @@ import { RegisterComponent } from './user/register/register.component';
 import { ChangepasswordComponent } from './user/changepassword/changepassword.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { LogoutComponent } from './user/logout/logout.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { NavbarComponent } from './navbar/navbar.component'
+import { NavbarComponent } from './navbar/navbar.component';
+import { DraganddropComponent } from './draganddrop/draganddrop.component';
+import { DragndropDirective } from './directives/dragndrop.directive'
 
 @NgModule({
   declarations: [
@@ -32,14 +33,15 @@ import { NavbarComponent } from './navbar/navbar.component'
     ChangepasswordComponent,
     ProfileComponent,
     LogoutComponent,
-    NavbarComponent
+    NavbarComponent,
+    DraganddropComponent,
+    DragndropDirective
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    FormsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

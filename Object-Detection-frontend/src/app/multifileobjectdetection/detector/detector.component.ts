@@ -20,12 +20,12 @@ export class DetectorComponent implements OnInit {
       if(message){
         this.get = message.data
         this.report = message.csv[0]
-        console.log(this.report)
+
       }
       else if(file){
         this.get = file.data
         this.report = file.csv[0]
-        console.log(this.report)
+
       }
       else{
         this.router.navigate(['/multidetector'])

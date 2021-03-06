@@ -11,15 +11,15 @@
 
                     <form (submit)="getMultiDetection()" enctype="multipart/form-data">
                         <div class="input-group mb-3">
-                            <div class="custom-file">
+                            <div class="custom-file" appDragndrop (dropedFiles)="getDropedFiles($event)">
                                 <input type="file" class="custom-file-input" multiple="true" id="inputGroupFile02" data-toggle="modal"
                                     data-target="#uploadModal" (change)="getfile($event)">
                                 <label class="custom-file-label" for="inputGroupFile02">{{label}}</label>
                             </div>
-                            <div class="input-group-append">
+                            <!-- <div class="input-group-append">
                                 <span class="input-group-text" type="button" data-toggle="modal"
                                     data-target="#preview" >Preview</span>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="form-group">
