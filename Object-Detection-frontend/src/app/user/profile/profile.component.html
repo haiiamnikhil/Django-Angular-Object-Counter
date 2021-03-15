@@ -1,147 +1,328 @@
-<div class="container emp-profile" *ngFor="let details of userdetails">
-    <form method="post" *ngFor="let user of details">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file"/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                            <h5>
-                                {{user.full_name}}
-                            </h5>
-                            <h6>
-                                {{user.organisation_type}}
-                            </h6>
-                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-            </div>
+<div id="app" *ngFor="let credentials of userdetails">
+    <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+  
+        <div class="page-heading">
+            <h3>Profile Statistics</h3>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    <p>WORK LINK</p>
-                    <a href="">Website Link</a><br/>
-                    <a href="">Bootsnipp Profile</a><br/>
-                    <a href="">Bootply Profile</a>
-                    <p>SKILLS</p>
-                    <a href="">Web Designer</a><br/>
-                    <a href="">Web Developer</a><br/>
-                    <a href="">WordPress</a><br/>
-                    <a href="">WooCommerce</a><br/>
-                    <a href="">PHP, .Net</a><br/>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>User Id</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{user.username}}</p>
+        <div class="page-content" *ngFor="let user of credentials">
+            <section class="row">
+                <div class="col-12 col-lg-9">
+                    <div class="row">
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon purple">
+                                                <i class="iconly-boldShow"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Total Image Uploaded</h6>
+                                            <h6 class="font-extrabold mb-0">112.000</h6>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Name</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{user.full_name}}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{user.email}}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Organisation Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{user.organisation_email}}</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon blue">
+                                                <i class="iconly-boldProfile"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Total SingleDetection</h6>
+                                            <h6 class="font-extrabold mb-0">183.000</h6>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Profession</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Web Developer and Designer</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon green">
+                                                <i class="iconly-boldAdd-User"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Total MultiDetection</h6>
+                                            <h6 class="font-extrabold mb-0">80.000</h6>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body px-3 py-4-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="stats-icon red">
+                                                <i class="iconly-boldBookmark"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h6 class="text-muted font-semibold">Total Limit</h6>
+                                            <h6 class="font-extrabold mb-0">112</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Experience</label>
+                    <section class="section">
+                        <div class="row" id="basic-table">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Table with outer spacing</h4>
                                     </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <!-- <p class="card-text">Using the most basic table up, here’s how
+                                                <code>.table</code>-based tables look in Bootstrap. You can use any example
+                                                of below table for your table and it can be use with any type of bootstrap
+                                                tables.
+                                            </p> -->
+                                            <!-- Table with outer spacing -->
+                                            <div class="table-responsive">
+                                                <table class="table table-lg">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>NAME</th>
+                                                            <th>RATE</th>
+                                                            <th>SKILL</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-bold-500">Michael Right</td>
+                                                            <td>$15/hr</td>
+                                                            <td class="text-bold-500">UI/UX</td>
+    
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-bold-500">Morgan Vanblum</td>
+                                                            <td>$13/hr</td>
+                                                            <td class="text-bold-500">Graphic concepts</td>
+    
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-bold-500">Tiffani Blogz</td>
+                                                            <td>$15/hr</td>
+                                                            <td class="text-bold-500">Animation</td>
+    
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-bold-500">Ashley Boul</td>
+                                                            <td>$15/hr</td>
+                                                            <td class="text-bold-500">Animation</td>
+    
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-bold-500">Mikkey Mice</td>
+                                                            <td>$15/hr</td>
+                                                            <td class="text-bold-500">Animation</td>
+    
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Hourly Rate</label>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="row">
+                        <div class="col-12 col-xl-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Profile Visit</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="d-flex align-items-center">
+                                                <svg class="bi text-primary" width="32" height="32" fill="blue"
+                                                    style="width:10px">
+                                                    <use
+                                                        xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                </svg>
+                                                <h5 class="mb-0 ms-3">Europe</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="mb-0">862</h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <div id="chart-europe"></div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <p>10$/hr</p>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="d-flex align-items-center">
+                                                <svg class="bi text-success" width="32" height="32" fill="blue"
+                                                    style="width:10px">
+                                                    <use
+                                                        xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                </svg>
+                                                <h5 class="mb-0 ms-3">America</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="mb-0">375</h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <div id="chart-america"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="d-flex align-items-center">
+                                                <svg class="bi text-danger" width="32" height="32" fill="blue"
+                                                    style="width:10px">
+                                                    <use
+                                                        xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                </svg>
+                                                <h5 class="mb-0 ms-3">Indonesia</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="mb-0">1025</h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <div id="chart-indonesia"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Total Projects</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>230</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Latest Comments</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-lg">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Comment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="col-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar avatar-md">
+                                                                <img src="assets/images/faces/5.jpg">
+                                                            </div>
+                                                            <p class="font-bold ms-3 mb-0">Si Cantik</p>
+                                                        </div>
+                                                    </td>
+                                                    <td class="col-auto">
+                                                        <p class=" mb-0">Congratulations on your graduation!</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar avatar-md">
+                                                                <img src="assets/images/faces/2.jpg">
+                                                            </div>
+                                                            <p class="font-bold ms-3 mb-0">Si Ganteng</p>
+                                                        </div>
+                                                    </td>
+                                                    <td class="col-auto">
+                                                        <p class=" mb-0">Wow amazing design! Can you make another
+                                                            tutorial for
+                                                            this design?</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>English Level</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Availability</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>6 months</p>
-                                    </div>
-                                </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Your Bio</label><br/>
-                                <p>Your detail description</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-12 col-lg-3">
+                    <div class="card">
+                        <div class="card-body py-4 px-5">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar avatar-xl">
+                                    <img src="assets/images/faces/1.jpg" alt="">
+                                </div>
+                                <div class="ms-3 name">
+                                    <h5 class="font-bold">{{user.full_name}}</h5>
+                                    <h6 class="text-muted mb-0">@{{user.username}}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Recent Messages</h4>
+                        </div>
+                        <div class="card-content pb-4">
+                            <div class="recent-message d-flex px-4 py-3">
+                                <div class="avatar avatar-lg">
+                                    <img src="assets/images/faces/4.jpg">
+                                </div>
+                                <div class="name ms-4">
+                                    <h5 class="mb-1">Hank Schrader</h5>
+                                    <h6 class="text-muted mb-0">@johnducky</h6>
+                                </div>
+                            </div>
+                            <div class="recent-message d-flex px-4 py-3">
+                                <div class="avatar avatar-lg">
+                                    <img src="assets/images/faces/5.jpg">
+                                </div>
+                                <div class="name ms-4">
+                                    <h5 class="mb-1">Dean Winchester</h5>
+                                    <h6 class="text-muted mb-0">@imdean</h6>
+                                </div>
+                            </div>
+                            <div class="recent-message d-flex px-4 py-3">
+                                <div class="avatar avatar-lg">
+                                    <img src="assets/images/faces/1.jpg">
+                                </div>
+                                <div class="name ms-4">
+                                    <h5 class="mb-1">John Dodol</h5>
+                                    <h6 class="text-muted mb-0">@dodoljohn</h6>
+                                </div>
+                            </div>
+                            <div class="px-4">
+                                <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
+                                    Conversation</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Visitors Profile</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-visitors-profile"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </form>           
-</div>
+    </div>
+  </div>

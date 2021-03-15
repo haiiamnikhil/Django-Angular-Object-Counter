@@ -25,6 +25,7 @@ export class MultifileobjectdetectionComponent implements OnInit {
       this.names.push(event[i].name)
       this.files.push(event[i]);
     }
+    console.log(this.files)
     this.label = this.names.length + " Files Added"
   }
 

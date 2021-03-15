@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
     this.apiService.userDetails().subscribe(response => {
       if(response.status){
         this.userdetails.push(response.message);
+        console.log(this.userdetails)
       }
     },
     error=>console.log(error))

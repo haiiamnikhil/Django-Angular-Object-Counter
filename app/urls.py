@@ -17,5 +17,6 @@ urlpatterns = [
     path('process-image/',single_image_processor,name='process'),
     path('multidetector/',multi_detector,name='multi_detector'),
     path('multidetector/detector/',multi_detector_processor,name='multi_detector_processor'),
-    path('multi-image-processor/',multi_image_processor,name='multi-image-processor')
+    path('multi-image-processor/',multi_image_processor,name='multi-image-processor'),
+    path('draganddrop/',drag_and_drop,name='dragndrop')
 ]

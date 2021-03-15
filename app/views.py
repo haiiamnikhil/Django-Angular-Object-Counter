@@ -182,3 +182,6 @@ def registerView(request):
 
 def userProfileView(request):
     return render(request, 'profile.html')
+
+def drag_and_drop(request):
+    return render(request, 'draganddrop.html')

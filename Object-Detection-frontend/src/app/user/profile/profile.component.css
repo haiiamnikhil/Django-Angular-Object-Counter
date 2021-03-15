@@ -1,92 +1,100 @@
-.emp-profile{
-    padding: 3%;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    border-radius: 0.5rem;
-    background: #fff;
+#main {
+    /* margin-left: 300px; */
+    padding: 2rem;
 }
-.profile-img{
-    text-align: center;
+
+.bi {
+    width: 1rem;
+    height: 1rem;
 }
-.profile-img img{
-    width: 70%;
-    height: 100%;
+
+.page-heading {
+    margin: 0 0 2rem;
 }
-.profile-img .file {
+.page-heading h3 {
+    font-weight: 700;
+}
+
+.card {
+    margin-bottom: 2.2rem;
+    border: none;
+}
+
+.card .card-body {
+    padding: 1.5rem;
+}
+.py-4-5 {
+    padding-top: 2rem!important;
+    padding-bottom: 2rem!important;
+}
+
+.stats-icon.purple {
+    background-color: #9694ff;
+}
+.stats-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: .5rem;
+    background-color: #000;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats-icon i {
+    color: #fff;
+    font-size: 1.7rem;
+}
+[class^="iconly-bold"], [class*=" iconly-bold"] {
+    font-family: 'Iconly---Bold' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.iconly-boldShow:before {
+    content: "\e952";
+}
+
+.card {
+    margin-bottom: 2.2rem;
+    border: none;
+}
+
+.card .card-header {
+    border: none;
+}
+
+.card .card-header h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.card .card-content {
     position: relative;
-    overflow: hidden;
-    margin-top: -20%;
-    width: 70%;
-    border: none;
-    border-radius: 0;
-    font-size: 15px;
-    background: #212529b8;
 }
-.profile-img .file input {
-    position: absolute;
-    opacity: 0;
-    right: 0;
-    top: 0;
+
+.avatar {
+    display: inline-flex;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
 }
-.profile-head h5{
-    color: #333;
+
+.avatar.avatar-lg .avatar-content, .avatar.avatar-lg img {
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
 }
-.profile-head h6{
-    color: #0062cc;
-}
-.profile-edit-btn{
-    border: none;
-    border-radius: 1.5rem;
-    width: 70%;
-    padding: 2%;
-    font-weight: 600;
-    color: #6c757d;
-    cursor: pointer;
-}
-.proile-rating{
-    font-size: 12px;
-    color: #818182;
-    margin-top: 5%;
-}
-.proile-rating span{
-    color: #495057;
-    font-size: 15px;
-    font-weight: 600;
-}
-.profile-head .nav-tabs{
-    margin-bottom:5%;
-}
-.profile-head .nav-tabs .nav-link{
-    font-weight:600;
-    border: none;
-}
-.profile-head .nav-tabs .nav-link.active{
-    border: none;
-    border-bottom:2px solid #0062cc;
-}
-.profile-work{
-    padding: 14%;
-    margin-top: -15%;
-}
-.profile-work p{
-    font-size: 12px;
-    color: #818182;
-    font-weight: 600;
-    margin-top: 10%;
-}
-.profile-work a{
-    text-decoration: none;
-    color: #495057;
-    font-weight: 600;
-    font-size: 14px;
-}
-.profile-work ul{
-    list-style: none;
-}
-.profile-tab label{
-    font-weight: 600;
-}
-.profile-tab p{
-    font-weight: 600;
-    color: #0062cc;
+.avatar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }
