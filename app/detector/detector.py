@@ -4,7 +4,7 @@ from glob import glob
 import os
 
 # Load Yolo
-net = cv2.dnn.readNet(os.path.join(os.path.dirname(__file__),"yolov3_custom_last.weights"), os.path.join(os.path.dirname(__file__),"yolov3_custom.cfg"))
+net = cv2.dnn.readNet(os.path.join(os.path.dirname(__file__),"yolov3.weights"), os.path.join(os.path.dirname(__file__),"yolov3.cfg"))
 classes = []
 with open(os.path.join(os.path.dirname(__file__),"coco.names"), "r") as f:
     classes = [line.strip() for line in f.readlines()]
@@ -32,7 +32,6 @@ def detect(filename,detectType,mode):
         
         # img = cv2.resize(img, None, fx=0.4, fy=0.4)
         height, width, channels = img.shape
-        print(width)
 
         # Detecting objects
         blob = cv2.dnn.blobFromImage(img, 0.00392, (416, 416), (0, 0, 0), True, crop=False)
@@ -75,7 +74,6 @@ def detect(filename,detectType,mode):
             if i in indexes:
                 x, y, w, h = boxes[i]
                 label = str(classes[class_ids[i]])
-                print(i)
                 if label==detectType.lower():
                     try:
                         color = colors[i]

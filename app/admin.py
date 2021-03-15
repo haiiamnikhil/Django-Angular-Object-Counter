@@ -10,3 +10,5 @@ admin.site.register(UserModel,UserModelAdmin)
 admin.site.register(UploadData)
 
 admin.site.register(Reports)
+
+admin.site.register(UserRecordCount)

@@ -1,5 +1,5 @@
 <div id="app" *ngFor="let credentials of userdetails">
-    <div id="main">
+    <div id="main" *ngFor="let values of count">
         <header class="mb-3">
             <a href="#" class="burger-btn d-block d-xl-none">
                 <i class="bi bi-justify fs-3"></i>
@@ -10,7 +10,7 @@
             <h3>Profile Statistics</h3>
         </div>
         <div class="page-content" *ngFor="let user of credentials">
-            <section class="row">
+            <section class="row" *ngFor="let count of values">
                 <div class="col-12 col-lg-9">
                     <div class="row">
                         <div class="col-6 col-lg-3 col-md-6">
@@ -24,7 +24,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Total Image Uploaded</h6>
-                                            <h6 class="font-extrabold mb-0">112.000</h6>
+                                            <h6 class="font-extrabold mb-0">{{count.totalCount}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Total SingleDetection</h6>
-                                            <h6 class="font-extrabold mb-0">183.000</h6>
+                                            <h6 class="font-extrabold mb-0">{{count.singleCount}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Total MultiDetection</h6>
-                                            <h6 class="font-extrabold mb-0">80.000</h6>
+                                            <h6 class="font-extrabold mb-0">{{count.multiCount}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="col-md-8">
                                             <h6 class="text-muted font-semibold">Total Limit</h6>
-                                            <h6 class="font-extrabold mb-0">112</h6>
+                                            <h6 class="font-extrabold mb-0">100</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -101,9 +101,9 @@
                                                 <table class="table table-lg">
                                                     <thead>
                                                         <tr>
-                                                            <th>NAME</th>
-                                                            <th>RATE</th>
-                                                            <th>SKILL</th>
+                                                            <th>Product Name</th>
+                                                            <th>Count</th>
+                                                            <th>Date</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>

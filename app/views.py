@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Reports, UploadData, UserModel
+from .models import Reports, UploadData, UserModel, UserRecordCount
 from .detector import detector
 import os
 import cv2 as cv
 from PIL import Image
 import numpy as np
 from django.views.decorators.csrf import csrf_exempt
-from .serializer import CsvSerializer, DetectionSerializer, UserSerializer
+from .serializer import CsvSerializer, DetectionSerializer, UserSerializer, RecordsCountSerializer
 import pandas as pd
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.parsers import JSONParser
@@ -21,7 +21,7 @@ def single_image_processor(request):
         detectType = request.POST.get('detectType')
         file = request.FILES.get('image')
         
-        data = UploadData.objects.create(user=request.user,image=file)
+        data = UploadData.objects.create(user=request.user,category=detectType,image=file,detection_type="Single")
         filename = data.image.name.split('/')[1]
         
         count, count_objects = detector.detect(filename,detectType,mode)
@@ -31,7 +31,19 @@ def single_image_processor(request):
         name = filename.split('.')[0]
         data.filename=name 
         data.singledetection = f"singledetection/{filename}"
+        data.count = count
         data.save()
+        
+        upload_details, status = UserRecordCount.objects.get_or_create(user=request.user)
+        upload_details.totalCount += 1
+        
+        if status:
+            upload_details.singleCount += 1
+            upload_details.save()
+            
+        else:
+            upload_details.singleCount += 1
+            upload_details.save()
         
         processed_data = UploadData.objects.filter(filename=name)
         
@@ -44,16 +56,21 @@ def single_image_processor(request):
 
 @csrf_exempt
 def multi_image_processor(request):
+    
+    try:os.mkdir(os.path.join('./media','reports'))
+    except:pass
+    
     filenames = []
     count = []
     detected_details = []
+    
     if request.method == 'POST':
-        mode = 'multi_object_detection'
         
+        mode = 'multi_object_detection'
+        dataType = request.POST.get('detection_type')
+
         for file in request.FILES.getlist('imagefiles'):
-            # original_file_name.append(file._name)
-            dataType = request.POST.get('detection_type')
-            data = UploadData.objects.create(user=request.user,image=file)
+            data = UploadData.objects.create(user=request.user,category=dataType,image=file,detection_type="Multiple")
             filename = data.image.name.split('/')[1]
             
             getCount, getDetection = detector.detect(filename,dataType,mode)
@@ -68,19 +85,26 @@ def multi_image_processor(request):
         
             filenames.append(name)
             count.append(getCount)
-
         
         for data in filenames:
             getDetails = UploadData.objects.filter(filename = data)
             imageSerilaizer = DetectionSerializer(getDetails,many=True)
             detected_details.append(imageSerilaizer.data)
             
+    
+        upload_details,status = UserRecordCount.objects.get_or_create(user=request.user)
+        upload_details.totalCount += len(filenames)
+
+        if status:
+            upload_details.multiCount += len(filenames)
+            upload_details.save()
         
+        else:
+            upload_details.multiCount += len(filenames)
+            upload_details.save()
+
         data = {'Files':filenames,'Count':count}
         df = pd.DataFrame(data)
-        
-        try:os.mkdir(os.path.join('./media','reports'))
-        except:pass
         
         df.to_csv(os.path.join('media/reports',f"{name}.csv"),index=None)
         
@@ -139,9 +163,14 @@ def isLoggedIn(request):
 def userDetails(request):
     if request.method == 'GET':
         user = UserModel.objects.filter(username=request.user)
-        getCount = UploadData.objects.filter(user=request.user).count()
-        serializer = UserSerializer(user,many=True)
-        return JsonResponse({'status':True,'message':serializer.data},safe=False,status=200)
+        try:
+            getCount = UserRecordCount.objects.create(user=request.user)
+        except:
+            getCount = UserRecordCount.objects.filter(user=request.user)
+        print(getCount)
+        count_serializer = RecordsCountSerializer(getCount,many=True)
+        user_serializer = UserSerializer(user,many=True)
+        return JsonResponse({'status':True,'message':user_serializer.data,'count':count_serializer.data},safe=False,status=200)
 
 
 @csrf_exempt

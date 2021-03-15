@@ -4,6 +4,7 @@ import string
 import os
 from django.contrib.auth.models import AbstractUser
 
+
 USER_TYPE = (
     ('Business','Business'),
     ('Computer and Information Technology','Computer and Information Technology'),
@@ -11,6 +12,13 @@ USER_TYPE = (
     ('Government','Government'),
     ('Others','Others')
 )
+
+
+DETECTION_TYPE = (
+    ('Single','Single'),
+    ('Multiple','Multiple')
+)
+
 
 def file_rename(instance,filename):
     upload_to = 'img'
@@ -46,6 +54,8 @@ class UserModel(AbstractUser):
 
 class UploadData(models.Model):
     user = models.ForeignKey(UserModel,on_delete=models.CASCADE,null=True)
+    category = models.CharField(max_length=20, null=True, blank=False, unique=False)
+    detection_type = models.CharField(max_length=50,choices=DETECTION_TYPE,unique=False, blank=False, null=True)
     filename = models.CharField(max_length=100,unique=False,blank=True,null=True)
     image = models.ImageField(upload_to=file_rename,blank=True,null=True)
     singledetection = models.ImageField(upload_to='singledetection/',blank=True,null=True)
@@ -57,3 +67,11 @@ class UploadData(models.Model):
         return self.filename
 
 
+class UserRecordCount(models.Model):
+    user = models.ForeignKey(UserModel,on_delete=models.CASCADE, null=True)
+    totalCount = models.BigIntegerField(unique=False,null=True,blank=True, default=0)
+    singleCount = models.BigIntegerField(null=True,blank=True,unique=False,default=0)
+    multiCount = models.BigIntegerField(null=True,blank=True,unique=False,default=0)
+    
+    def __str__(self):
+        return str(self.user)
