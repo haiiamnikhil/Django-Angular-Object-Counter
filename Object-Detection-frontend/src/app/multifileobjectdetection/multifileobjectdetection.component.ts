@@ -40,7 +40,6 @@ export class MultifileobjectdetectionComponent implements OnInit {
 
   uploadData(){
     this.fileTransferService.setMessages(this.files)
-    // this.router.navigate(['/multidetector/detector'])
   }
 
   getMultiDetection(){

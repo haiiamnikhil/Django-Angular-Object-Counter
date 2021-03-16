@@ -22,21 +22,13 @@ DETECTION_TYPE = (
 
 def file_rename(instance,filename):
     upload_to = 'img'
-    ext = filename.split('.')[-1]
+    name,ext = filename.split('.')
     if instance.pk:
         filename = f"{filename}.{ext}"
     else:
-        filename = f"{''.join(random.choices(string.ascii_letters+string.digits,k=10))}.{ext}"
+        filename = f"{name}{''.join(random.choices(string.ascii_lowercase+string.digits,k=8))}.{ext}"
     
     return os.path.join(upload_to,filename)
-
-
-class Reports(models.Model):
-    filename = models.CharField(max_length=20,unique=False,null=True,blank=True)
-    report = models.FileField(upload_to='reports/',blank=True,null=True)
-
-    def __str__(self):
-        return self.filename
 
 
 class UserModel(AbstractUser):
@@ -67,7 +59,7 @@ class UploadData(models.Model):
         return self.filename
 
 
-class UserRecordCount(models.Model):
+class UserProcessCount(models.Model):
     user = models.ForeignKey(UserModel,on_delete=models.CASCADE, null=True)
     totalCount = models.BigIntegerField(unique=False,null=True,blank=True, default=0)
     singleCount = models.BigIntegerField(null=True,blank=True,unique=False,default=0)
@@ -75,3 +67,23 @@ class UserRecordCount(models.Model):
     
     def __str__(self):
         return str(self.user)
+    
+
+class ProductTotalCount(models.Model):
+    user = models.ForeignKey(UserModel, null=True, blank=False, on_delete=models.CASCADE)
+    item = models.CharField(max_length=50,blank=False,unique=False,null=True)
+    totalCount = models.BigIntegerField(null=True, blank=False, default=0,unique=False)
+    lastDate = models.DateField(auto_now_add=True)
+    
+    def __str__(self):
+        return str(self.user)
+    
+
+class UserCSVRecord(models.Model):
+    user = models.ForeignKey(UserModel,on_delete=models.CASCADE,null=True,blank=False)
+    filename = models.CharField(max_length=20,unique=False,null=True,blank=True)
+    csvFile = models.FileField(upload_to='reports/',blank=True,null=True)
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.filename)

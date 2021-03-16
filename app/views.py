@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Reports, UploadData, UserModel, UserRecordCount
+from .models import ProductTotalCount, UserCSVRecord, UploadData, UserModel, UserProcessCount
 from .detector import detector
 import os
 import cv2 as cv
@@ -12,7 +12,9 @@ import pandas as pd
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.parsers import JSONParser
 from django.contrib.auth.hashers import make_password
-
+import datetime as dt
+import random
+import string
 
 @csrf_exempt
 def single_image_processor(request):
@@ -34,7 +36,7 @@ def single_image_processor(request):
         data.count = count
         data.save()
         
-        upload_details, status = UserRecordCount.objects.get_or_create(user=request.user)
+        upload_details, status = UserProcessCount.objects.get_or_create(user=request.user)
         upload_details.totalCount += 1
         
         if status:
@@ -68,12 +70,14 @@ def multi_image_processor(request):
         
         mode = 'multi_object_detection'
         dataType = request.POST.get('detection_type')
-
+        productCount = 0
+        
         for file in request.FILES.getlist('imagefiles'):
             data = UploadData.objects.create(user=request.user,category=dataType,image=file,detection_type="Multiple")
             filename = data.image.name.split('/')[1]
             
             getCount, getDetection = detector.detect(filename,dataType,mode)
+            productCount += getCount
             
             cv.imwrite(os.path.join('media/multidetection',filename),getDetection)
             
@@ -92,7 +96,7 @@ def multi_image_processor(request):
             detected_details.append(imageSerilaizer.data)
             
     
-        upload_details,status = UserRecordCount.objects.get_or_create(user=request.user)
+        upload_details,status = UserProcessCount.objects.get_or_create(user=request.user)
         upload_details.totalCount += len(filenames)
 
         if status:
@@ -106,13 +110,31 @@ def multi_image_processor(request):
         data = {'Files':filenames,'Count':count}
         df = pd.DataFrame(data)
         
-        df.to_csv(os.path.join('media/reports',f"{name}.csv"),index=None)
+        time = dt.datetime.now().time()
+        time = time.strftime('%H:%M:%S')
+        print(type(time))
+        date = dt.datetime.today().date()
+        
+        csvSaveName = f"{request.user.username}-{date}-{request.user.id}"
+        
+        df.to_csv(os.path.join('media/reports',f"{csvSaveName}.csv"),index=None)
         
         csv_name = f"reports/{name}.csv"
-        reports = Reports.objects.get_or_create(filename=name,report=csv_name)
         
+        reports = UserCSVRecord.objects.get_or_create(user=request.user,filename=name,csvFile=csv_name)
+        
+        try:
+            add_total_count = ProductTotalCount.objects.get(user=request.user,item=dataType)
+            add_total_count.totalCount += productCount
+            add_total_count.save()
+            
+        except:
+            add_total_count = ProductTotalCount.objects.create(user=request.user,item=dataType)
+            add_total_count.totalCount += productCount
+            add_total_count.save()
+    
         serializer = CsvSerializer(reports,many=True)
-
+        
         return JsonResponse({"status":True,"csv":serializer.data,"data":detected_details},safe=False,status=200)
 
 
@@ -163,11 +185,7 @@ def isLoggedIn(request):
 def userDetails(request):
     if request.method == 'GET':
         user = UserModel.objects.filter(username=request.user)
-        try:
-            getCount = UserRecordCount.objects.create(user=request.user)
-        except:
-            getCount = UserRecordCount.objects.filter(user=request.user)
-        print(getCount)
+        getCount = UserProcessCount.objects.filter(user=request.user)
         count_serializer = RecordsCountSerializer(getCount,many=True)
         user_serializer = UserSerializer(user,many=True)
         return JsonResponse({'status':True,'message':user_serializer.data,'count':count_serializer.data},safe=False,status=200)

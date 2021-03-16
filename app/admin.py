@@ -9,6 +9,8 @@ admin.site.register(UserModel,UserModelAdmin)
 
 admin.site.register(UploadData)
 
-admin.site.register(Reports)
+admin.site.register(UserCSVRecord)
 
-admin.site.register(UserRecordCount)
+admin.site.register(UserProcessCount)
+
+admin.site.register(ProductTotalCount)
