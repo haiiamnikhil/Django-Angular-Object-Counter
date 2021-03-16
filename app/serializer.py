@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UploadData, UserCSVRecord, UserModel, UserProcessCount
+from .models import ProductTotalCount, UploadData, UserCSVRecord, UserModel, UserProcessCount
 
 
 class DetectionSerializer(serializers.ModelSerializer):
@@ -11,7 +11,7 @@ class DetectionSerializer(serializers.ModelSerializer):
 class CsvSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserCSVRecord
-        fields = ['csvFile']
+        fields = '__all__'
         
 
 class UserSerializer(serializers.ModelSerializer):
@@ -23,4 +23,10 @@ class UserSerializer(serializers.ModelSerializer):
 class RecordsCountSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProcessCount
+        fields = '__all__'
+        
+
+class ProductTotalCountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductTotalCount
         fields = '__all__'

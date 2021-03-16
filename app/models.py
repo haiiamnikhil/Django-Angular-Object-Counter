@@ -26,7 +26,7 @@ def file_rename(instance,filename):
     if instance.pk:
         filename = f"{filename}.{ext}"
     else:
-        filename = f"{name}{''.join(random.choices(string.ascii_lowercase+string.digits,k=8))}.{ext}"
+        filename = f"{name}-{''.join(random.choices(string.ascii_lowercase+string.digits,k=8))}.{ext}"
     
     return os.path.join(upload_to,filename)
 

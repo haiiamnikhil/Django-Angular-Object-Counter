@@ -51,4 +51,7 @@ export class ApiService {
     return this.http.get('/user-details/',{headers:this.header})
   }
 
+  getInventory():Observable<any>{
+    return this.http.get('/inventory/',{headers:this.header})
+  }
 }

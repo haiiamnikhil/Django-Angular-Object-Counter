@@ -7,7 +7,7 @@ import cv2 as cv
 from PIL import Image
 import numpy as np
 from django.views.decorators.csrf import csrf_exempt
-from .serializer import CsvSerializer, DetectionSerializer, UserSerializer, RecordsCountSerializer
+from .serializer import CsvSerializer, DetectionSerializer, ProductTotalCountSerializer, UserSerializer, RecordsCountSerializer
 import pandas as pd
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.parsers import JSONParser
@@ -112,16 +112,16 @@ def multi_image_processor(request):
         
         time = dt.datetime.now().time()
         time = time.strftime('%H:%M:%S')
-        print(type(time))
         date = dt.datetime.today().date()
+        date = date.strftime('%d-%m-%Y')
         
-        csvSaveName = f"{request.user.username}-{date}-{request.user.id}"
+        csvSaveName = f"{request.user.username}-{date}-{time.replace(':','-')}"
         
         df.to_csv(os.path.join('media/reports',f"{csvSaveName}.csv"),index=None)
         
-        csv_name = f"reports/{name}.csv"
+        csvFile = f"reports/{csvSaveName}.csv"
         
-        reports = UserCSVRecord.objects.get_or_create(user=request.user,filename=name,csvFile=csv_name)
+        reports = UserCSVRecord.objects.get_or_create(user=request.user,filename=csvSaveName,csvFile=csvFile)
         
         try:
             add_total_count = ProductTotalCount.objects.get(user=request.user,item=dataType)
@@ -195,6 +195,17 @@ def userDetails(request):
 def logoutUser(request):
     logout(request)
     return JsonResponse({'status':True},safe=False,status=200)
+    
+    
+def getInventory(request):
+    if request.method == 'GET':
+        productCount = ProductTotalCount.objects.filter(user=request.user)
+        csvFiles = UserCSVRecord.objects.filter(user=request.user)
+        
+        countSerializer = ProductTotalCountSerializer(productCount,many=True)
+        csvSerializer = CsvSerializer(csvFiles,many=True)
+        
+        return JsonResponse({'status':True,'productCounts':countSerializer.data,"csvFiles":csvSerializer.data},safe=False,status=200)
     
     
 def home(request):

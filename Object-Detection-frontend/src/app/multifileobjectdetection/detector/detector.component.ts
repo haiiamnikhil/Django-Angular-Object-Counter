@@ -19,13 +19,12 @@ export class DetectorComponent implements OnInit {
     this.ApiService.currentmessage.subscribe(message =>{
       if(message){
         this.get = message.data
-        this.report = message.csv[0]
+        this.report = message.csv[0].csvFile
 
       }
       else if(file){
         this.get = file.data
-        this.report = file.csv[0]
-
+        this.report = file.csv[0].csvFile
       }
       else{
         this.router.navigate(['/multidetector'])

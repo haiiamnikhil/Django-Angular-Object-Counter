@@ -18,7 +18,8 @@ import { LogoutComponent } from './user/logout/logout.component';
 import { environment } from '../environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DraganddropComponent } from './draganddrop/draganddrop.component';
-import { DragndropDirective } from './directives/dragndrop.directive'
+import { DragndropDirective } from './directives/dragndrop.directive';
+import { ProductsinventoryComponent } from './user/profile/productsinventory/productsinventory.component'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DragndropDirective } from './directives/dragndrop.directive'
     LogoutComponent,
     NavbarComponent,
     DraganddropComponent,
-    DragndropDirective
+    DragndropDirective,
+    ProductsinventoryComponent,
   ],
   imports: [
     HttpClientModule,
